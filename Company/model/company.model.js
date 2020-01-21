@@ -1,10 +1,4 @@
 const mongoose = require('mongoose');
-mongoose.set('useNewUrlParser', true);
-mongoose.set('useUnifiedTopology', true);
-
-mongoose.connect('mongodb://localhost/jas_dev')
-.then(() => console.log('Connect to mongodb..'))
-.catch(err => console.err('Could not connect to mongodb..',err));
 
 //class schema
 const companySchema = new mongoose.Schema({
@@ -13,9 +7,13 @@ const companySchema = new mongoose.Schema({
     email: String,
     phone: Number,
     address: String,
-    GSTNo: String
+    GSTNo: String,
+    ValidTo: Date,
+    ValidFrom: Date,
+    CreatedBy: Int16Array,
+    CreatedOn: Date
 });
 
 //class Company
-const Company = mongoose.model('Company',companySchema);
+module.exports = mongoose.model('Company',companySchema);
 
