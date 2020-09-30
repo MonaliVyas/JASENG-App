@@ -1,0 +1,114 @@
+<div class="row">
+    <div class="col-md-8 col-xs-12">
+        <div class="white-box">
+            <form #form="ngForm" (ngSubmit)="save(form)" class="form-horizontal form-material">
+                <div class="form-group">
+                    <label class="col-md-12 required">First Name</label>
+                    <div class="col-md-12">
+                        <input #FirstName="ngModel" [(ngModel)]="user.FirstName" name="FirstName" type="text"
+                            class="form-control form-control-line" required minlength="2" maxlength="30">
+                    </div>
+                    <div class="alert alert-danger" *ngIf="(FirstName.touched || submitted) && (FirstName.invalid || serverError?.hasOwnProperty('FirstName'))">
+                        <div *ngIf="FirstName.errors?.required">First name is required</div>
+                        <div *ngIf="FirstName.errors?.minlength">First name must be at least 2 characters long</div>
+                        <div *ngIf="serverError?.FirstName">{{serverError?.FirstName}}</div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-12 required">Last Name</label>
+                    <div class="col-md-12">
+                        <input #LastName="ngModel" [(ngModel)]="user.LastName" name="LastName" type="text"
+                            class="form-control form-control-line" required minlength="2" maxlength="30">
+
+                    </div>
+                    <div class="alert alert-danger" *ngIf="(LastName.touched || submitted) && (LastName.invalid || serverError?.hasOwnProperty('LastName'))">
+                        <div *ngIf="LastName.errors?.required">Last name is required</div>
+                        <div *ngIf="LastName.errors?.minlength">LastName name must be at least 2 characters long</div>
+                        <div *ngIf="serverError?.LastName">{{serverError?.LastName}}</div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-12">Gender</label>
+                    <div class="col-md-12">
+                    <input [(ngModel)]="user.Gender" name="Gender" value="male" type="radio">
+                    <label for="male">Male</label>
+                    <input [(ngModel)]="user.Gender" name="Gender" value="female" type="radio">
+                    <label for="female">Female</label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-12 required">Date of birth</label>
+                    <div class="col-md-12">
+                        <input #DOB="ngModel" [(ngModel)]="user.DOB" name="DOB" type="date"
+                            class="form-control form-control-line" required>
+                    </div>
+                        <div class="alert alert-danger" *ngIf="((DOB.touched || submitted) && (DOB.invalid || serverError?.hasOwnProperty('DOB')))">
+                            <div *ngIf="DOB.errors?.required">Date of birth is required</div>
+                            <div *ngIf="serverError?.DOB">{{serverError?.DOB}}</div>
+                        </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-12 required">Email Address</label>
+                    <div class="col-md-12">
+                        <!-- <input #Email="ngModel" [(ngModel)]="user.Email" name="Email" type="email"
+                            class="form-control form-control-line" required maxlength="320"> -->
+                             <input #Email="ngModel" [(ngModel)]="user.Email" name="Email" type="email"
+                            class="form-control form-control-line" required pattern="^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$" maxlength="255">
+                    </div>
+                    <div class="alert alert-danger" *ngIf="(Email.touched || submitted) && (Email.invalid || serverError?.hasOwnProperty('Email'))">
+                        <div *ngIf="Email.errors?.required">Email is required</div>
+                        <div *ngIf="Email.errors?.pattern">Email is invalid</div>
+                        <div *ngIf="serverError?.Email">{{serverError?.Email}}</div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-12 required">Mobile Number</label>
+                    <div class="row col-md-12">
+                        <div class="col-md-1 form-control form-control-line">
+                            <span>+91</span>
+                        </div>
+                        <div class="col-md-11">
+                        <input #Mobile="ngModel" [(ngModel)]="user.Mobile" name="Mobile"
+                            class="form-control form-control-line" type="text" required pattern="^[0-9]{10,10}$">
+                        </div>
+                    </div>
+                    <div class="alert alert-danger" *ngIf="(Mobile.touched || submitted) && (Mobile.invalid || serverError?.hasOwnProperty('Mobile'))">
+                        <div *ngIf="Mobile.errors?.required">Mobile is required</div>
+                        <div *ngIf="Mobile.errors?.pattern">Mobile is invalid</div>
+                        <!-- <div *ngIf="Mobile.errors?.minlength">Mobile number must be at least 10 characters long</div> -->
+                        <div *ngIf="serverError?.Mobile">{{serverError?.Mobile}}</div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-12">User Role</label>
+                    <div class="col-sm-12">
+                        <select #Role="ngModel" [(ngModel)]="user.Role" name="Role" class="form-control form-control-line" required>
+                            <option></option>
+                            <option value="1">Super Admin</option>
+                            <option value="2">Admin</option>
+                            <option value="3">Reporting</option>
+                        </select>
+                    </div>
+                    <div class="alert alert-danger" *ngIf="(Role.touched || submitted) && (Role.invalid || serverError?.hasOwnProperty('Role'))">
+                        <div *ngIf="Role.errors?.required">Role is required</div>
+                        <div *ngIf="serverError?.Role">{{serverError?.Role}}</div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div *ngIf="user._id != null">
+                        <label class="col-md-12">IsActive</label>
+                        <div class="col-md-12">
+                            <input [(ngModel)]="user.IsActive" name="IsActive" type="checkbox">
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-12">
+                        <input type="submit" value="Add User" class="btn btn-success">
+                        <button type="button" (click)="cancel()">Cancel</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,4 @@
+label.required::after {
+    color: #e32;
+    content: ' *';
+}
