@@ -7,7 +7,7 @@ import { Router } from "@angular/router";
   styleUrls: ['./app.component.css']
 })
 export class AppComponent{
-  title = 'jas-billing-app';
+  title = 'app';
   constructor(public router: Router) {}
 
   public isCollapsed = false;

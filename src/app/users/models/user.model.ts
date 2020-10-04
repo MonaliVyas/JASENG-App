@@ -14,6 +14,4 @@ export class User {
         public ModifiedBy?: number,
         public ModifiedDate?: Date
     ) { }
-
-
 }

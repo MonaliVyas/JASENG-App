@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { User } from '../models/user.model';
 import { analyzeAndValidateNgModules } from '@angular/compiler';
+import { Observable } from 'rxjs';
+
+import { User } from '../models/user.model';
 
 @Injectable({
   providedIn: 'root'
