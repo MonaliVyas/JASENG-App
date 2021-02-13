@@ -24,6 +24,7 @@ import { UserSaveComponent } from './users/user-save/user-save.component';
 import { UserService } from './users/services/user.service';
 import { LoggingService } from './common/services/logging.service';
 import { NotificationComponent } from './shared/notification/notification.component';
+import { MatDialogModule } from '@angular/material/dialog';
 // import { CompaniesComponent } from './companies/companies.component';
 // import { CompanySaveComponent } from './companies/company-save/company-save.component';
 
@@ -38,9 +39,11 @@ import { NotificationComponent } from './shared/notification/notification.compon
 		HomeComponent,
 		UsersComponent,
 		UserSaveComponent,
-		NotificationComponent,
 		// CompaniesComponent,
 		// CompanySaveComponent
+	],
+	entryComponents:[
+		NotificationComponent,
 	],
 	imports: [
 		CommonModule,
@@ -49,21 +52,22 @@ import { NotificationComponent } from './shared/notification/notification.compon
 		FormsModule,
 		HttpClientModule,
 		NgbModule,
+		MatDialogModule,
 		RouterModule.forRoot(Approutes, { useHash: false })
 	],
 	providers: [
-		{
-			provide: HTTP_INTERCEPTORS,
-			useClass: HttpErrorInterceptor,
-			multi: true,
-		},
-		{
-			provide: ErrorHandler,
-			useClass: GlobalErrorHandler,
-			multi: true,
-		},
 		LoggingService,
-		UserService
+		UserService,
+		// {
+		// 	provide: HTTP_INTERCEPTORS,
+		// 	useClass: HttpErrorInterceptor,
+		// 	multi: true,
+		// },
+		// {
+		// 	provide: ErrorHandler,
+		// 	useClass: GlobalErrorHandler,
+		// 	multi: true,
+		// }
 	],
 	bootstrap: [AppComponent]
 })
